@@ -1,0 +1,31 @@
+Configuration:
+  status: warn
+  appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40c}{cyan} %clr{:}{faint} %m%n%xwEx"
+    RollingFile:
+      - name: RollingFile
+        fileName: logs/telescope.log
+        filePattern: "logs/telescope-%d{yyyy-MM-dd}.log"
+        PatternLayout:
+          Pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p --- [%t] %-40.40c{1.} : %m%n%xwEx"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+        DefaultRolloverStrategy:
+          max: 7
+  Loggers:
+    Root:
+      AppenderRef:
+        - ref: Console
+        - ref: RollingFile
+    logger:
+      - name: org.springframework
+        level: info
+      - name: org.mybatis.spring
+        level: error
+      - name: com.lee.ts
+        level: info
