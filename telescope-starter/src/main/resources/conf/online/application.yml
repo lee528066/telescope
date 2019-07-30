@@ -18,7 +18,8 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         session.timeout.ms: 15000
-
-kafka:
-  topic:
-    group-id:
+hbase:
+  zookeeper:
+    quorum: local
+    property-client-port: 2181
+    node-parent: /hbase

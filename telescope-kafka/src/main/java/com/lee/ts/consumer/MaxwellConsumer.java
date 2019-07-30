@@ -18,15 +18,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MaxwellConsumer implements BatchAcknowledgingMessageListener<String, String> {
 
-//    @Override
-//    @KafkaListener(containerFactory = "kafkaListenerContainerFactory", topics = "maxwell")
-//    public void onMessage(ConsumerRecord<String, String> data, Acknowledgment acknowledgment) {
-//        log.info("message:{}", data.value());
-//
-//    }
-
     @Override
-    @KafkaListener(containerFactory = "kafkaListenerContainerFactory", topics = "maxwell")
+    @KafkaListener(containerFactory = "kafkaListenerContainerFactory", groupId = "telescope.consumer",
+            topics = "maxwell", autoStartup = "false")
     public void onMessage(List<ConsumerRecord<String, String>> data, Acknowledgment acknowledgment) {
         for (ConsumerRecord<String, String> datum : data) {
             log.info("message:{}", datum.value());

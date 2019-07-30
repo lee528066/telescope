@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: 127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092
+    bootstrap-servers: 127.0.0.1:9092
 
 #    producer:
 #      retries: 0
@@ -12,13 +12,15 @@ spring:
 #        linger.ms: 1
 
     consumer:
+      concurrency: 4
+      batch-listener: true
       enable-auto-commit: false
-      auto-commit-interval: 5000ms
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      properties:
-        session.timeout.ms: 15000
+      max-poll-records: 10
 
-kafka:
-  topic:
-    group-id:
+hbase:
+  zookeeper:
+    quorum: local
+    property-client-port: 2181
+    node-parent: /hbase
