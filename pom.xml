@@ -12,6 +12,8 @@
         <module>telescope-starter</module>
         <module>telescope-kafka</module>
         <module>telescope-hbase</module>
+        <module>telescope-elasticsearch</module>
+        <module>telescope-core</module>
     </modules>
 
     <parent>
@@ -25,10 +27,12 @@
         <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
         <spring.kafka.version>2.2.6.RELEASE</spring.kafka.version>
         <hbase.client.version>2.2.0</hbase.client.version>
+        <spring.data.elasticsearch.version>3.2.0.RELEASE</spring.data.elasticsearch.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--telescope-->
             <dependency>
                 <groupId>telescope</groupId>
                 <artifactId>telescope-kafka</artifactId>
@@ -39,7 +43,18 @@
                 <artifactId>telescope-hbase</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>telescope</groupId>
+                <artifactId>telescope-elasticsearch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>telescope</groupId>
+                <artifactId>telescope-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
+            <!--spring.boot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
@@ -56,15 +71,26 @@
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+
+            <!-- kafka -->
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${spring.kafka.version}</version>
             </dependency>
+
+            <!--hbase-->
             <dependency>
                 <groupId>org.apache.hbase</groupId>
                 <artifactId>hbase-client</artifactId>
                 <version>${hbase.client.version}</version>
+            </dependency>
+
+            <!--elasticsearch-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${spring.boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -79,6 +105,16 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
         </dependency>
 
         <dependency>

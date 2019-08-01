@@ -13,6 +13,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("hbase")
 public class HbasePropertiesConfig {
 
+    /**
+     * 是否开启hbase备份
+     */
+    private boolean enableHbaseBackup;
+
+    /**
+     * hbase client连接池大小
+     */
+    private Integer ipcPoolSize;
+
+    /**
+     * zookeeper相关配置
+     */
     private Zookeeper zookeeper = new Zookeeper();
 
     public static class Zookeeper {

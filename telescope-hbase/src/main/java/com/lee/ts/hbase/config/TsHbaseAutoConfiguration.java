@@ -29,7 +29,11 @@ public class TsHbaseAutoConfiguration {
     private HbasePropertiesConfig propertiesConfig;
 
     @Bean
-    public Connection connection(){
+    public Connection connection() {
+        if (!propertiesConfig.isEnableHbaseBackup()){
+            log.info("未开启hbase备份");
+            return null;
+        }
         Connection connection = null;
         try {
             connection = ConnectionFactory.createConnection(configuration(propertiesConfig),
@@ -40,12 +44,12 @@ public class TsHbaseAutoConfiguration {
         return connection;
     }
 
-    public org.apache.hadoop.conf.Configuration configuration(HbasePropertiesConfig propertiesConfig){
+    private org.apache.hadoop.conf.Configuration configuration(HbasePropertiesConfig propertiesConfig) {
         org.apache.hadoop.conf.Configuration conf = HBaseConfiguration.create();
         conf.set(HConstants.ZOOKEEPER_QUORUM, propertiesConfig.getZookeeper().getQuorum());
         conf.set(HConstants.CLIENT_ZOOKEEPER_CLIENT_PORT, propertiesConfig.getZookeeper().getPropertyClientPort());
         conf.set(HConstants.ZOOKEEPER_ZNODE_PARENT, propertiesConfig.getZookeeper().getNodeParent());
-        conf.set(HConstants.HBASE_CLIENT_IPC_POOL_SIZE, "10");
+        conf.set(HConstants.HBASE_CLIENT_IPC_POOL_SIZE, propertiesConfig.getIpcPoolSize() + "");
         return conf;
     }
 }

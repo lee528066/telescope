@@ -1,4 +1,11 @@
 spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch_user
+      cluster-nodes: localhost:9300
+      repositories:
+        enabled: true
+
   kafka:
     bootstrap-servers: 127.0.0.1:9092
 
@@ -20,7 +27,9 @@ spring:
       max-poll-records: 10
 
 hbase:
+  enablse-hbase-backup: false
+  ipc-pool-size: 10
   zookeeper:
-    quorum: local
+    quorum: localhost
     property-client-port: 2181
     node-parent: /hbase

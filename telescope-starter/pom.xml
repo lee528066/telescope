@@ -21,6 +21,15 @@
             <artifactId>telescope-hbase</artifactId>
         </dependency>
         <dependency>
+            <groupId>telescope</groupId>
+            <artifactId>telescope-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>telescope</groupId>
+            <artifactId>telescope-core</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
