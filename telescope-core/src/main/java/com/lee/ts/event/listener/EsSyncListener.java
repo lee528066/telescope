@@ -12,19 +12,19 @@ import javax.annotation.Resource;
  * @date 2019-08-02 17:22
  */
 @Component
-public class EsSyncListener implements EventListener<SyncEvent> {
+public class EsSyncListener implements EventListener<SyncEvent>{
 
     @Resource
     private EsBinlogService esBinlogService;
 
     @Override
-    public void onEvent(SyncEvent event) {
-        String json = (String) event.getValue();
-        esBinlogService.add(Binlog.fromJsonStr(json));
+    public int order(){
+        return Integer.MIN_VALUE;
     }
 
     @Override
-    public int order(){
-        return Integer.MIN_VALUE;
+    public void onEvent(SyncEvent event) {
+        String json = (String) event.getValue();
+        esBinlogService.add(Binlog.fromJsonStr(json));
     }
 }

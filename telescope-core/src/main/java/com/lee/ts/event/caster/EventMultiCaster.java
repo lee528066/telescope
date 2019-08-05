@@ -1,5 +1,6 @@
-package com.lee.ts.event;
+package com.lee.ts.event.caster;
 
+import com.lee.ts.event.BaseEvent;
 import com.lee.ts.event.listener.EventListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
@@ -8,7 +9,8 @@ import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -24,17 +26,15 @@ import static java.util.stream.Collectors.groupingBy;
  */
 @Slf4j
 @Component
-public class EventMultiCaster{
+public class EventMultiCaster {
 
     @Resource
     private ApplicationContext applicationContext;
 
-    private final String ON_EVENT_METHOD = "onEvent";
-
     private Map<Class<BaseEvent>, List<EventListener>> listenerCache = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
-    public void publish(BaseEvent event){
+    public void publish(BaseEvent event) {
         List<EventListener> eventListeners = listenerCache.get(event.getClass());
         Assert.notEmpty(eventListeners, String.format("event: %s 未正常注册到listenerCache中", event.getClass()));
         eventListeners.forEach(eventListener -> eventListener.onEvent(event));
@@ -44,7 +44,7 @@ public class EventMultiCaster{
      * 将所有的{@link EventListener}注册到listenerCache中
      */
     @PostConstruct
-    public void registerListener(){
+    public void registerListener() {
         String[] names = applicationContext.getBeanNamesForType(EventListener.class);
 
         List<EventListener> eventListeners = Stream.of(names)
@@ -66,16 +66,12 @@ public class EventMultiCaster{
     private void buildListenerCache(List<EventListener> eventListeners) {
         listenerCache = eventListeners.stream()
                 .collect(groupingBy(eventListener -> {
-                    Class<BaseEvent> parameterType = null;
-                    try {
-                        Method onEventMethod = eventListener.getClass().getMethod(ON_EVENT_METHOD);
-                        parameterType = (Class<BaseEvent>) onEventMethod.getParameterTypes()[0];
-                    } catch (NoSuchMethodException e) {
-                        log.error("注册EventListener发生异常:", e);
-                    }
-                    Assert.isTrue(parameterType != null && BaseEvent.class.isAssignableFrom(parameterType),
+                    ParameterizedType genericInterface = (ParameterizedType) eventListener.getClass().getGenericInterfaces()[0];
+                    Type actualEventType = genericInterface.getActualTypeArguments()[0];
+                    Class eventClazz = (Class) actualEventType;
+                    Assert.isTrue(eventClazz != null && BaseEvent.class.isAssignableFrom(eventClazz),
                             "该eventListener的onEvent方法参数不正确");
-                    return parameterType;
+                    return eventClazz;
                 }));
     }
 }

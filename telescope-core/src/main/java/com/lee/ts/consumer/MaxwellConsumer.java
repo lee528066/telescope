@@ -1,6 +1,6 @@
 package com.lee.ts.consumer;
 
-import com.lee.ts.event.EventMultiCaster;
+import com.lee.ts.event.caster.EventMultiCaster;
 import com.lee.ts.event.SyncEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
