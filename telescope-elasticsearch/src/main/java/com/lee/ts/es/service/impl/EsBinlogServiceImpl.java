@@ -4,14 +4,12 @@ import com.lee.ts.es.bean.Binlog;
 import com.lee.ts.es.compoment.ConditionQueryBuilder;
 import com.lee.ts.es.condition.EsSearchCondition;
 import com.lee.ts.es.repository.BinlogRepository;
-import com.lee.ts.es.service.BinlogService;
+import com.lee.ts.es.service.EsBinlogService;
 import org.apache.commons.collections.CollectionUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
@@ -21,14 +19,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
-
 /**
  * @author liwei
  * @date 2019-07-30 19:04
  */
 @Service
-public class BinlogServiceImpl implements BinlogService {
+public class EsBinlogServiceImpl implements EsBinlogService {
 
     @Resource
     private BinlogRepository mysqlBinlogRepository;

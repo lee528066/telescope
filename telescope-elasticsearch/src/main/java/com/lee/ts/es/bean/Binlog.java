@@ -1,5 +1,6 @@
 package com.lee.ts.es.bean;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -61,4 +62,11 @@ public class Binlog {
 
     @Field(type= FieldType.Text)
     private String data;
+
+    @Field(type= FieldType.Text)
+    private String old;
+
+    public static Binlog fromJsonStr(String jsonStr){
+        return JSON.parseObject(jsonStr, Binlog.class);
+    }
 }

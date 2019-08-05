@@ -11,7 +11,7 @@ import java.util.List;
  * @author liwei
  * @date 2019-07-30 19:02
  */
-public interface BinlogService {
+public interface EsBinlogService {
 
     void batchAdd(List<Binlog> logs);
 
