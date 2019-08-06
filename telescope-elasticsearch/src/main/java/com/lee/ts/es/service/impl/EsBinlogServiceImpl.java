@@ -1,7 +1,7 @@
 package com.lee.ts.es.service.impl;
 
 import com.lee.ts.es.bean.Binlog;
-import com.lee.ts.es.compoment.ConditionQueryBuilder;
+import com.lee.ts.es.component.ConditionQueryBuilder;
 import com.lee.ts.es.condition.EsSearchCondition;
 import com.lee.ts.es.repository.BinlogRepository;
 import com.lee.ts.es.service.EsBinlogService;

@@ -1,9 +1,9 @@
 package com.lee.ts.es.condition;
 
-import com.lee.ts.es.compoment.Enum.QueryType;
-import com.lee.ts.es.compoment.Enum.RangeOperation;
-import com.lee.ts.es.compoment.anotation.EsCondition;
-import com.lee.ts.es.compoment.anotation.EsQueryType;
+import com.lee.ts.es.component.Enum.QueryType;
+import com.lee.ts.es.component.Enum.RangeOperation;
+import com.lee.ts.es.component.anotation.EsCondition;
+import com.lee.ts.es.component.anotation.EsQueryType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;

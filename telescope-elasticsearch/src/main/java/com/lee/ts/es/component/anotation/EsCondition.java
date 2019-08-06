@@ -1,4 +1,4 @@
-package com.lee.ts.es.compoment.anotation;
+package com.lee.ts.es.component.anotation;
 
 import java.lang.annotation.*;
 

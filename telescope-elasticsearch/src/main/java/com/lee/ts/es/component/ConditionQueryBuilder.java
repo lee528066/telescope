@@ -1,7 +1,7 @@
-package com.lee.ts.es.compoment;
+package com.lee.ts.es.component;
 
-import com.lee.ts.es.compoment.anotation.EsCondition;
-import com.lee.ts.es.compoment.anotation.EsQueryType;
+import com.lee.ts.es.component.anotation.EsCondition;
+import com.lee.ts.es.component.anotation.EsQueryType;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.AbstractQueryBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;

@@ -1,4 +1,4 @@
-package com.lee.ts.es.compoment;
+package com.lee.ts.es.component;
 
 import com.lee.ts.es.condition.EsSearchCondition;
 import org.elasticsearch.index.query.QueryBuilder;

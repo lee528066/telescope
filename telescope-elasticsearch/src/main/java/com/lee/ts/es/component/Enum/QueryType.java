@@ -1,4 +1,4 @@
-package com.lee.ts.es.compoment.Enum;
+package com.lee.ts.es.component.Enum;
 
 /**
  * @author liwei

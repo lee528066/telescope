@@ -1,9 +1,9 @@
-package com.lee.ts.es.compoment.anotation;
+package com.lee.ts.es.component.anotation;
 
 
-import com.lee.ts.es.compoment.Enum.QueryType;
-import com.lee.ts.es.compoment.Enum.RangeOperation;
-import com.lee.ts.es.compoment.Enum.StrongType;
+import com.lee.ts.es.component.Enum.QueryType;
+import com.lee.ts.es.component.Enum.RangeOperation;
+import com.lee.ts.es.component.Enum.StrongType;
 
 import java.lang.annotation.*;
 

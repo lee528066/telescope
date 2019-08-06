@@ -16,7 +16,7 @@ import java.util.Date;
  * @date 2019-07-30 17:17
  */
 @Data
-@Document(indexName = "mysqlbinlog", type = "binlog")
+@Document(indexName = "mysqlbinlog-#{ T(com.lee.ts.es.component.IndexDateExpression).getDateStr() }", type = "binlog")
 public class Binlog {
 
     @Id
