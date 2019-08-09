@@ -40,5 +40,10 @@ public class TestController {
         return esBinlogService.findByCondition(condition, pageable);
     }
 
+    @GetMapping("/condition/indices/find")
+    public Object findByConditionInIndices(EsSearchCondition condition, @PageableDefault(sort = "ts") Pageable pageable){
+        return esBinlogService.findByConditionIndices(condition, pageable);
+    }
+
     private static final String json = "{\"database\":\"wms\",\"table\":\"auth_user\",\"type\":\"bootstrap-insert\",\"ts\":1563957082,\"data\":{\"id\":327,\"user_name\":\"谢媛1\",\"password\":\"+itT6Kd91zydCjZdt9s3o2DLE0AdERz8pUSMOT75FD/efLgQLtEzpF1tv9OflNZN\",\"is_available\":1,\"account\":\"xiey\",\"user_email\":null,\"user_phone\":null,\"create_user_id\":0,\"create_time\":\"2017-09-04 15:53:22\",\"update_time\":\"2017-09-18 17:41:23\",\"warehouse_id\":2,\"user_auth_version\":2}}\n";
 }

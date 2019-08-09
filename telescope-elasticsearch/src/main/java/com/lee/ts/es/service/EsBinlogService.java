@@ -24,4 +24,6 @@ public interface EsBinlogService {
     Page<Binlog> findByTable(String table, Pageable pageable);
 
     Page<Binlog> findByCondition(EsSearchCondition esSearchCondition, Pageable pageable);
+
+    Page<Binlog> findByConditionIndices(EsSearchCondition esSearchCondition, Pageable pageable);
 }

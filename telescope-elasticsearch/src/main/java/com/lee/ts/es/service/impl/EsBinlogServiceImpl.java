@@ -2,6 +2,7 @@ package com.lee.ts.es.service.impl;
 
 import com.lee.ts.es.bean.Binlog;
 import com.lee.ts.es.component.ConditionQueryBuilder;
+import com.lee.ts.es.component.template.IndicesElasticsearchTemplate;
 import com.lee.ts.es.condition.EsSearchCondition;
 import com.lee.ts.es.repository.BinlogRepository;
 import com.lee.ts.es.service.EsBinlogService;
@@ -34,6 +35,9 @@ public class EsBinlogServiceImpl implements EsBinlogService {
 
     @Resource
     private ConditionQueryBuilder conditionQueryBuilder;
+
+    @Resource
+    private IndicesElasticsearchTemplate indicesElasticsearchTemplate;
 
     @Override
     public void batchAdd(List<Binlog> logs) {
@@ -77,5 +81,14 @@ public class EsBinlogServiceImpl implements EsBinlogService {
                 .withPageable(pageable)
                 .build();
         return elasticsearchTemplate.queryForPage(searchQuery, Binlog.class);
+    }
+
+    @Override
+    public Page<Binlog> findByConditionIndices(EsSearchCondition esSearchCondition, Pageable pageable) {
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withFilter(conditionQueryBuilder.builder(esSearchCondition))
+                .withPageable(pageable)
+                .build();
+        return indicesElasticsearchTemplate.queryForPage(searchQuery, Binlog.class);
     }
 }
