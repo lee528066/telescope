@@ -17,6 +17,8 @@ import java.util.Objects;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
+ * 将ES搜索条件组装成ES API的Query的对象
+ * (注意：传入的condition对象必须被{@link EsCondition}注解修饰)
  * @author liwei
  * @date 2019-08-01 14:52
  */

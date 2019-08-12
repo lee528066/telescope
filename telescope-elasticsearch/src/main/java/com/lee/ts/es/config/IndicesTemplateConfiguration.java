@@ -24,11 +24,10 @@ import org.springframework.data.elasticsearch.core.convert.ElasticsearchConverte
 @AutoConfigureAfter(ElasticsearchDataAutoConfiguration.class)
 public class IndicesTemplateConfiguration {
 
-    @Bean
+    @Bean(name = "indicesElasticsearchTemplate")
     @ConditionalOnMissingBean
     @ConditionalOnBean({ElasticsearchConverter.class, ElasticsearchTemplate.class})
-    public IndicesElasticsearchTemplate indicesElasticsearchTemplate(ElasticsearchConverter converter,
-                                                                     ElasticsearchTemplate elasticsearchTemplate) {
+    public IndicesElasticsearchTemplate indicesTemplate(ElasticsearchConverter converter, ElasticsearchTemplate elasticsearchTemplate) {
         return new IndicesElasticsearchTemplate(elasticsearchTemplate.getClient(),
                 converter, elasticsearchTemplate);
     }

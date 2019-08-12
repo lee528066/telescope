@@ -1,31 +1,13 @@
-/*
- * Copyright 2013-2019 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.lee.ts.es.component.template;
 
 import com.lee.ts.es.component.IndexSplitStrategy;
 import com.lee.ts.es.component.anotation.Indices;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.ActionFuture;
 import org.elasticsearch.action.admin.indices.stats.IndicesStatsRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.*;
@@ -48,11 +30,9 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
-import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;

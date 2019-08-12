@@ -45,6 +45,7 @@ public class EsBinlogServiceImpl implements EsBinlogService {
             return;
         }
         List<IndexQuery> indexQueries = logs.stream().map(log -> {
+                    log.wrapTimeInfo();
                     IndexQuery indexQuery = new IndexQuery();
                     indexQuery.setObject(log);
                     return indexQuery;
@@ -55,7 +56,7 @@ public class EsBinlogServiceImpl implements EsBinlogService {
 
     @Override
     public void add(Binlog log) {
-        log.setHappenTime(new Date(log.getTs() * 1000));
+        log.wrapTimeInfo();
         mysqlBinlogRepository.save(log);
     }
 

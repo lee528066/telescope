@@ -58,6 +58,13 @@ public class Binlog {
     private Date happenTime;
 
     /**
+     * es的插入时间
+     */
+    @Field(type= FieldType.Date)
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date esInsertTime;
+
+    /**
      * 事务xid
      */
     private String xid;
@@ -72,5 +79,10 @@ public class Binlog {
 
     public static Binlog fromJsonStr(String jsonStr){
         return JSON.parseObject(jsonStr, Binlog.class);
+    }
+
+    public void wrapTimeInfo(){
+        setEsInsertTime(new Date());
+        setHappenTime(new Date(getTs() * 1000));
     }
 }
