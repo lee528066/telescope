@@ -10,10 +10,8 @@
     <version>1.0.0</version>
     <modules>
         <module>telescope-starter</module>
-        <module>telescope-kafka</module>
-        <module>telescope-hbase</module>
-        <module>telescope-elasticsearch</module>
         <module>telescope-core</module>
+        <module>telescope-spi</module>
     </modules>
 
     <parent>
