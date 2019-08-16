@@ -14,10 +14,10 @@ telescope(望远镜)是一个基于java实现的RDS数据变化查询平台。�
 7. 等等任何你能想到的价值...
 
 ## 架构设计（图片待补充）
-1.mysql binlog解析通过[maxwell](https://github.com/zendesk/maxwell.git)中间件实现，将json化的row数据同步到kafka对应的topic（maxwell也支持其他多种数据源）
-2.postgresql wal逻辑日志解析通过 hellobike [amazonriver](https://github.com/lee528066/amazonriver.git) 的中间件实现, 将json化的row数据同步到kafka对应的topic
+1. mysql binlog解析通过[maxwell](https://github.com/zendesk/maxwell.git)中间件实现，将json化的row数据同步到kafka对应的topic（maxwell也支持其他多种数据源）
+2. postgresql wal逻辑日志解析通过 hellobike [amazonriver](https://github.com/lee528066/amazonriver.git) 的中间件实现, 将json化的row数据同步到kafka对应的topic
 注意: 这里是我自己fork的项目，主要修改了wal逻辑复制过程中对old-keys数据的扩展记录。原项目并不支持old-keys。git地址：[amazonriver](https://github.com/hellobike/amazonriver.git)
-3.由于amazonriver的项目是go语言实现，而且对于生成的json格式row数据，无法解析出xid（事务id）。最近在开始自己实现java版本的 walLogTojson 的项目。[elephant](https://github.com/lee528066/elephant.git)
+3. 由于amazonriver的项目是go语言实现，而且对于生成的json格式row数据，无法解析出xid（事务id）。最近在开始自己实现java版本的 walLogTojson 的项目。[elephant](https://github.com/lee528066/elephant.git)
 
 ## 特性
 1. 基于spring-data-elasticsearch和spring的spel表达式，实现了es的index自动按时间分片（这部分实现可能没有Logstash强大），解决索引数据膨胀的问题。
