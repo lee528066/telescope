@@ -15,8 +15,8 @@ import javax.annotation.Resource;
  * @date 2019-07-31 11:24
  */
 @RestController
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/es/search")
+public class SearchController {
 
     @Resource
     private EsBinlogService esBinlogService;
