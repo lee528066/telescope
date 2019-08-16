@@ -1,7 +1,7 @@
 # telescope
 
 ## 介绍：
-telescope(望远镜)是一个RDS数据变化查询平台。通过监听关系型数据库动态变化kafka消息——一般是格式化的日志数据（如:mysql的binlog日志，postgresql的wal逻辑日志），将json化的日志同步到elasticsearch集群中。
+telescope(望远镜)是一个基于java实现的RDS数据变化查询平台。通过监听关系型数据库动态变化kafka消息——一般是格式化的日志数据（如:mysql的binlog日志，postgresql的wal逻辑日志），将json化的日志同步到elasticsearch集群中。
 通过kibana查询相关的数据源级，表级别，事务级别，row级别的变化记录。telescope本身也提供了restful风格的http请求，自定义查询api反馈对应的分页结果。
 
 ## 价值：
