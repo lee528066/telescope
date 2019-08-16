@@ -20,7 +20,7 @@ telescope(望远镜)是一个基于java实现的RDS数据变化查询平台。�
 3. 由于amazonriver的项目是go语言实现，而且对于生成的json格式row数据，无法解析出xid（事务id）。最近在开始自己实现java版本的 walLogTojson 的项目。[elephant](https://github.com/lee528066/elephant.git)
 
 ## 特性
-1. 基于spring-data-elasticsearch和spring的spel表达式，实现了es的index自动按时间分片（这部分实现可能没有Logstash强大），解决索引数据膨胀的问题。
+1. 基于spring-data-elasticsearch和spring的spel表达式，实现了es的index自动按时间分片（这部分实现可能没有Logstash强大），解决索引数据可能膨胀过快的问题，为按照时间维度删除index提供基础。减少后期elasticsearch的reindex的复杂操作次数。
 2. spring-data-elasticsearch的ElasticsearchTemplate只能查询当前指定的索引，且代码实现扩展性差。自实现IndicesElasticsearchTemplate
 和@Indices索引，实现查询前缀相同的所有索引。
 
