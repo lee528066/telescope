@@ -13,12 +13,20 @@ telescope(望远镜)是一个RDS数据变化查询平台。通过监听关系型
 6. 无入侵式的备份rds历史数据提供可能性（mysql单表数据量不建议超过500w左右）。mysql->hbase：备份无用的历史数据（如：历史订单）；mysql->elasticsearch: 提供更强的实时查询能力（如：大量的库存交易流水）
 7. 等等任何你能想到的价值...
 
-# TODO LIST
-1. 接入mysql用于统计DML|DDL频率
-2. 接入hbase用于备份历史数据
-    1. 后期考虑dump出insert语句用于数据回滚
-3. 接入elk提供日志查询
-4. 引入事件驱动的设计模式来实现以上功能。包括定时的异步任务框架
-5. 开发一个小工具能够监听java进程
+## 架构设计（图片待补充）
+1.mysql binlog解析通过[maxwell](https://github.com/zendesk/maxwell.git)中间件实现，将json化的row数据同步到kafka对应的topic（maxwell也支持其他多种数据源）
+2.postgresql wal逻辑日志解析通过 hellobike [amazonriver](https://github.com/lee528066/amazonriver.git) 的中间件实现, 将json化的row数据同步到kafka对应的topic
+注意: 这里是我自己fork的项目，主要修改了wal逻辑复制过程中对old-keys数据的扩展记录。原项目并不支持old-keys。git地址：[amazonriver](https://github.com/hellobike/amazonriver.git)
+3.由于amazonriver的项目是go语言实现，而且对于生成的json格式row数据，无法解析出xid（事务id）。最近在开始自己实现java版本的 walLogTojson 的项目。[elephant](https://github.com/lee528066/elephant.git)
 
-目前maxwell是针对单个mysql实例的，所以json报˚文中无法看出是哪个mysql数据库（ip）需要定制maxwell
+## 特性
+1. 基于spring-data-elasticsearch和spring的spel表达式，实现了es的index自动按时间分片（这部分实现可能没有Logstash强大），解决索引数据膨胀的问题。
+2. spring-data-elasticsearch的ElasticsearchTemplate只能查询当前指定的索引，且代码实现扩展性差。自实现IndicesElasticsearchTemplate
+和@Indices索引，实现查询前缀相同的所有索引。
+
+# TODO LIST
+1. postgresql的日志同步, 先实现elephant项目
+2. DML频率统计
+3. SyncEvent的持久化（解决数据一致性问题）
+4. SyncEvent的异步化（增加kafka消息处理的吞吐量）
+5. 引入报警机制，监控数据同步的延迟过高的情况
