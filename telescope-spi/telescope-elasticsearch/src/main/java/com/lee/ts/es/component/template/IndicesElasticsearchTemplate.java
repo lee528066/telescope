@@ -44,7 +44,9 @@ import java.util.stream.Collectors;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
- * 重新写了ElasticsearchTemplate，实现基于多个index的创建和查询
+ * spring-data-elasticsearch中的ElasticsearchTemplate不支持从多个index中查询数据。
+ * IndicesElasticsearchTemplate可以实现基于多个index的查询
+ * 主要通过实体bean的{@link Indices}注解实现
  * {@link com.lee.ts.es.component.IndexSplitStrategy}
  * @author liwei
  */
