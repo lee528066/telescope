@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class HellbikeDataxConsumer implements BatchAcknowledgingMessageListener<String, String> {
+public class HellobikeDataxConsumer implements BatchAcknowledgingMessageListener<String, String> {
 
     @Resource
     private EventMultiCaster eventMulticaster;
