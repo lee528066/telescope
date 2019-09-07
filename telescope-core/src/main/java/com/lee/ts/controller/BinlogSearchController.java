@@ -15,23 +15,23 @@ import javax.annotation.Resource;
  * @date 2019-07-31 11:24
  */
 @RestController
-@RequestMapping("/es/search")
-public class SearchController {
+@RequestMapping("/es/binlog")
+public class BinlogSearchController {
 
     @Resource
     private EsBinlogService esBinlogService;
 
-    @RequestMapping("/byTable/find")
+    @GetMapping("/find_by_table")
     public Object findByTable(String table, @PageableDefault(sort = "ts") Pageable pageable){
         return esBinlogService.findByTable(table, pageable);
     }
 
-    @GetMapping("/condition/find")
+    @GetMapping("/find_by_condition")
     public Object findByCondition(EsSearchCondition condition, @PageableDefault(sort = "ts") Pageable pageable){
         return esBinlogService.findByCondition(condition, pageable);
     }
 
-    @GetMapping("/condition/indices/find")
+    @GetMapping("/indices/find_by_condition")
     public Object findByConditionInIndices(EsSearchCondition condition, @PageableDefault(sort = "ts") Pageable pageable){
         return esBinlogService.findByConditionIndices(condition, pageable);
     }

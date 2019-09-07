@@ -1,6 +1,7 @@
 package com.lee.ts.es.component.template;
 
-import com.lee.ts.es.component.IndexSplitStrategy;
+import com.lee.ts.es.component.splitstrategy.AbstractIndexSplitStrategy;
+import com.lee.ts.es.component.splitstrategy.BinlogSplitStrategy;
 import com.lee.ts.es.component.anotation.Indices;
 import com.lee.ts.es.constant.EsConst;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.*;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.expression.BeanFactoryAccessor;
@@ -47,14 +50,14 @@ import static org.springframework.util.CollectionUtils.isEmpty;
  * spring-data-elasticsearch中的ElasticsearchTemplate不支持从多个index中查询数据。
  * IndicesElasticsearchTemplate可以实现基于多个index的查询
  * 主要通过实体bean的{@link Indices}注解实现
- * {@link com.lee.ts.es.component.IndexSplitStrategy}
+ * {@link BinlogSplitStrategy}
  * @author liwei
  */
 @Slf4j
 public class IndicesElasticsearchTemplate implements ApplicationContextAware, InitializingBean {
 
-    @Resource
-    private IndexSplitStrategy indexSplitStrategy;
+    @Autowired
+    private AbstractIndexSplitStrategy abstractIndexSplitStrategy;
 
     private final StandardEvaluationContext context;
 
@@ -85,12 +88,11 @@ public class IndicesElasticsearchTemplate implements ApplicationContextAware, In
 
     @Override
     public void afterPropertiesSet() {
-        indexSplitStrategy.initIndicesCache(getNonKibanaIndices());
+        abstractIndexSplitStrategy.initIndicesCache(getNonKibanaIndices());
     }
 
     /**
      * 获取所有的业务索引（排除kibana的系统索引）
-     *
      * @return 业务索引集合
      */
     private Set<String> getNonKibanaIndices() {

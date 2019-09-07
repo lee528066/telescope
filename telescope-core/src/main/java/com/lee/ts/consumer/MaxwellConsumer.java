@@ -23,7 +23,8 @@ public class MaxwellConsumer implements BatchAcknowledgingMessageListener<String
     private EventMultiCaster eventMulticaster;
 
     @Override
-    @KafkaListener(containerFactory = "kafkaListenerContainerFactory", groupId = "telescope.maxwell.consumer", topics = "maxwell", autoStartup = "true")
+    @KafkaListener(containerFactory = "kafkaListenerContainerFactory", groupId = "telescope.maxwell.consumer",
+            topics = "maxwell", autoStartup = "true")
     public void onMessage(List<ConsumerRecord<String, String>> dataRecords, Acknowledgment acknowledgment) {
         for (ConsumerRecord<String, String> dataRecord : dataRecords) {
             log.info("key:{} message:{}", dataRecord.key(), dataRecord.value());

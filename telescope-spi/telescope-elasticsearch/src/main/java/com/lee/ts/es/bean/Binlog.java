@@ -2,7 +2,7 @@ package com.lee.ts.es.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.lee.ts.es.component.IndexSplitStrategy;
+import com.lee.ts.es.component.splitstrategy.BinlogSplitStrategy;
 import com.lee.ts.es.component.anotation.Indices;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -13,14 +13,14 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.util.Date;
 
 /**
- * 根据{@link IndexSplitStrategy#getCurIndex(String)}获取当前的index
- * 根据{@link IndexSplitStrategy#getIndices()}获取所有的index
+ * 根据{@link BinlogSplitStrategy#getCurIndex(String)}获取当前的index
+ * 根据{@link BinlogSplitStrategy#getIndices()}获取所有的index
  * @author liwei
  * @date 2019-07-30 17:17
  */
 @Data
-@Document(indexName = "#{ indexSplitStrategy.getCurIndex('month') }", type = "binlog")
-@Indices(indexName = "#{ indexSplitStrategy.getIndices() }")
+@Document(indexName = "#{ binlogSplitStrategy.getCurIndex('month') }", type = "binlog")
+@Indices(indexName = "#{ binlogSplitStrategy.getIndices() }")
 public class Binlog {
 
     @Id
