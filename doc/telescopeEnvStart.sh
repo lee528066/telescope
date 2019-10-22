@@ -18,4 +18,5 @@ sleep 10s
 nohup maxwell --config /usr/local/etc/maxwell/config.properties > ~/log/maxwell.file 2>&1 &
 echo '------maxwell started'
 
+
 echo "---------------------- start success"
